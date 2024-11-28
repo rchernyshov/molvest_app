@@ -22,3 +22,13 @@ def setup_routes(app):
     def stats():
         stats_data = model.get_stats()
         return jsonify(stats_data)
+
+    @app.route("/predict/next7days", methods=["GET"])
+    def predict_next_7_days():
+        predictions = model.predict_next_7_days()
+        return jsonify(predictions)
+
+    @app.route("/predict/monthly", methods=["GET"])
+    def predict_monthly():
+        predictions = model.predict_monthly()
+        return jsonify(predictions)

@@ -14,3 +14,12 @@ class DataLoader:
         data['Sales_kg'] = data['Sales_kg'].str.replace(',', '.').astype(float)
         data["Date"] = pd.to_datetime(data["Date"], format="%d.%m.%Y")
         return data
+
+    def calculate_correlation(self):
+        # Загрузим данные
+        data = self.load_data()
+
+        # Рассчитаем корреляцию между числовыми признаками
+        correlation_matrix = data.corr()
+
+        return correlation_matrix

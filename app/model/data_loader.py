@@ -16,10 +16,6 @@ class DataLoader:
         return data
 
     def calculate_correlation(self):
-        # Загрузим данные
         data = self.load_data()
-
-        # Рассчитаем корреляцию между числовыми признаками
         correlation_matrix = data.corr()
-
         return correlation_matrix

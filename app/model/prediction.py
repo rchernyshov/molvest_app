@@ -13,9 +13,6 @@ class PredictionModel:
         self.is_trained = False
 
     def preprocess_data(self):
-        """
-        Подготовка данных без переименования столбцов, исключение выбросов.
-        """
         # Исключаем строки с некорректными значениями (ноль или отрицательные значения)
         self.data = self.data[self.data["Sales_kg"] > 0]
 
@@ -32,9 +29,6 @@ class PredictionModel:
         return self.data
 
     def create_sequences(self, data, sequence_length):
-        """
-        Создание последовательностей для обучения модели.
-        """
         sequences = []
         targets = []
         for i in range(len(data) - sequence_length):
@@ -43,9 +37,6 @@ class PredictionModel:
         return np.array(sequences), np.array(targets)
 
     def train_model(self):
-        """
-        Обучение модели Keras.
-        """
         # Предварительная обработка данных
         self.data = self.preprocess_data()
 
@@ -72,7 +63,6 @@ class PredictionModel:
         self.is_trained = True
         print("Model trained successfully.")
 
-    # для получения статистики
     def get_summary_statistics(self):
         summary = {
             "mean": round(self.data["Sales_kg"].mean(), 2),
@@ -83,9 +73,7 @@ class PredictionModel:
         return summary
 
     def predict_next_7_days(self):
-        """
-        Прогноз на следующие 7 дней с фактическими датами.
-        """
+        
         if not self.is_trained:
             raise Exception("Model is not trained. Call train_model() first.")
 
@@ -115,9 +103,6 @@ class PredictionModel:
                 i, pred in enumerate(predictions)]
 
     def predict_monthly(self):
-        """
-        Прогноз на месяц с фактическими датами.
-        """
         if not self.is_trained:
             raise Exception("Model is not trained. Call train_model() first.")
 
